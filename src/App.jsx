@@ -1,4 +1,4 @@
-import BookItem from "./components/bookItem/BookItem";
+import Books from "./components/books/Books";
 
 const App = () => {
   const books = [
@@ -40,34 +40,7 @@ const App = () => {
     <div>
       <h1>¡Bienvenidos a Book Champions!</h1>
       <p>¡Quiero leer libros!</p>
-      <BookItem
-        title={books[0].bookTitle}
-        author={books[0].author}
-        rating={books[0].bookRating}
-        pages={books[0].pageCount}
-        image={books[0].imageUrl}
-      />
-      <BookItem
-        title={books[1].bookTitle}
-        author={books[1].author}
-        rating={books[1].bookRating}
-        pages={books[1].pageCount}
-        image={books[1].imageUrl}
-      />
-      <BookItem
-        title={books[2].bookTitle}
-        author={books[2].author}
-        rating={books[2].bookRating}
-        pages={books[2].pageCount}
-        image={books[2].imageUrl}
-      />
-      <BookItem
-        title={books[3].bookTitle}
-        author={books[3].author}
-        rating={books[3].bookRating}
-        pages={books[3].pageCount}
-        image={books[3].imageUrl}
-      />
+      <Books books={books} />
     </div>
   );
 };

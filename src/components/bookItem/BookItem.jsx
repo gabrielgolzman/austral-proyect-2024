@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
 
-const BookItem = ({ title, author, rating, pages, image }) => {
+const BookItem = ({ title, author, rating, pages, image, children }) => {
   return (
-    <Card style={{ width: "22rem" }}>
+    <Card className="mx-3" style={{ width: "22rem" }}>
       <Card.Img
+        alt="book image"
         height={400}
         variant="top"
         src={
@@ -19,6 +20,7 @@ const BookItem = ({ title, author, rating, pages, image }) => {
         <div>{rating?.length} estrellas</div>
         <p>{pages} páginas</p>
       </Card.Body>
+      {children}
     </Card>
   );
 };
@@ -30,5 +32,4 @@ BookItem.propTypes = {
   author: PropTypes.string,
   pages: PropTypes.number,
   rating: PropTypes.array,
-  image: PropTypes.string,
 };
