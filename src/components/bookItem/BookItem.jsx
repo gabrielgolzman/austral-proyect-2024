@@ -1,9 +1,18 @@
-import PropTypes from "prop-types";
-import { Card } from "react-bootstrap";
+import { useState } from "react";
 
-const BookItem = ({ title, author, rating, pages, image, children }) => {
+import PropTypes from "prop-types";
+
+import { Card, Button } from "react-bootstrap";
+
+const BookItem = ({ title, author, rating, pages, image }) => {
+  const [bookTitle, setBookTitle] = useState(title);
+
+  const clickHandler = () => {
+    setBookTitle("Actualizado");
+  };
+
   return (
-    <Card className="mx-3" style={{ width: "22rem" }}>
+    <Card className="mx-3 mt-2" style={{ width: "22rem" }}>
       <Card.Img
         alt="book image"
         height={400}
@@ -15,12 +24,12 @@ const BookItem = ({ title, author, rating, pages, image, children }) => {
         }
       />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title>{bookTitle}</Card.Title>
         <Card.Subtitle>{author}</Card.Subtitle>
         <div>{rating?.length} estrellas</div>
         <p>{pages} páginas</p>
+        <Button onClick={clickHandler}> Seleccionar libro </Button>
       </Card.Body>
-      {children}
     </Card>
   );
 };

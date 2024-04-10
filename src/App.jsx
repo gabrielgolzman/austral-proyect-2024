@@ -1,4 +1,5 @@
 import Books from "./components/books/Books";
+import NewBook from "./components/newBook/NewBook";
 
 const App = () => {
   const books = [
@@ -36,10 +37,23 @@ const App = () => {
     },
   ];
 
+  const saveBookDataHandler = (bookData) => {
+    const newBookData = {
+      ...bookData,
+      id: Math.random().toString(),
+    };
+
+    console.log(newBookData);
+  };
+
   return (
-    <div>
+    <div className="d-flex flex-column align-items-center">
       <h1>¡Bienvenidos a Book Champions!</h1>
       <p>¡Quiero leer libros!</p>
+      <NewBook onBookDataSaved={saveBookDataHandler} />
+      <p>
+        Libro seleccionado: <span className="fw-bold">Selected book</span>
+      </p>
       <Books books={books} />
     </div>
   );
