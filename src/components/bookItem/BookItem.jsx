@@ -1,11 +1,17 @@
 import PropTypes from "prop-types";
 
 import { Card, Button } from "react-bootstrap";
+import { Star, StarFill } from "react-bootstrap-icons";
 
 const BookItem = ({ title, author, rating, pages, image, onSelectBook }) => {
   const clickHandler = () => {
     onSelectBook(title);
   };
+
+  const starsFilled = rating?.map((rating, index) => <StarFill key={index} />);
+  const starsEmpty = Array(5 - rating.length)
+    .fill("*")
+    .map((rating, index) => <Star key={index} />);
 
   return (
     <Card className="mx-3 mt-2" style={{ width: "22rem" }}>
@@ -22,7 +28,7 @@ const BookItem = ({ title, author, rating, pages, image, onSelectBook }) => {
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>{author}</Card.Subtitle>
-        <div>{rating?.length} estrellas</div>
+        {starsFilled}{starsEmpty}
         <p>{pages} páginas</p>
         <Button onClick={clickHandler}> Seleccionar libro </Button>
       </Card.Body>

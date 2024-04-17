@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Books from "./components/books/Books";
 import NewBook from "./components/newBook/NewBook";
+
 const books = [
   {
     id: 1,
@@ -43,6 +44,7 @@ const books = [
 const App = () => {
   const [selectedBook, setSelectedBook] = useState("");
   const [booksList, setBooksList] = useState(books);
+  const [searchValue, setSearchValue] = useState("");
 
   const saveBookDataHandler = (bookData) => {
     const newBookData = {
@@ -57,6 +59,12 @@ const App = () => {
     setSelectedBook(title);
   };
 
+  const searchHandler = (searchQuery) => {
+    setSearchValue(searchQuery);
+    setBooksList(books.filter(b =>
+      b.bookTitle.toUpperCase().includes(searchQuery.toUpperCase())));
+  };
+
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>¡Bienvenidos a Book Champions!</h1>
@@ -65,7 +73,11 @@ const App = () => {
       <p>
         Libro seleccionado: <span className="fw-bold">{selectedBook}</span>
       </p>
-      <Books books={booksList} onSelectBook={selectBookHandler} />
+      <Books
+        books={booksList}
+        searchValue={searchValue}
+        onSearch={searchHandler}
+        onSelectBook={selectBookHandler} />
     </div>
   );
 };
