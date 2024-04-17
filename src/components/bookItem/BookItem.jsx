@@ -1,14 +1,10 @@
-import { useState } from "react";
-
 import PropTypes from "prop-types";
 
 import { Card, Button } from "react-bootstrap";
 
-const BookItem = ({ title, author, rating, pages, image }) => {
-  const [bookTitle, setBookTitle] = useState(title);
-
+const BookItem = ({ title, author, rating, pages, image, onSelectBook }) => {
   const clickHandler = () => {
-    setBookTitle("Actualizado");
+    onSelectBook(title);
   };
 
   return (
@@ -24,7 +20,7 @@ const BookItem = ({ title, author, rating, pages, image }) => {
         }
       />
       <Card.Body>
-        <Card.Title>{bookTitle}</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Subtitle>{author}</Card.Subtitle>
         <div>{rating?.length} estrellas</div>
         <p>{pages} páginas</p>
