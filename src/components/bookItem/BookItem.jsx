@@ -31,6 +31,7 @@ const BookItem = ({ title, author, rating, pages, image, onSelectBook }) => {
         {starsFilled}{starsEmpty}
         <p>{pages} páginas</p>
         <Button onClick={clickHandler}> Seleccionar libro </Button>
+        <Button variant="danger" className="ms-2" onClick={() => { }}>Eliminar libro</Button>
       </Card.Body>
     </Card>
   );
