@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from
     "react-bootstrap";
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+
+const Login = ({ onLogin }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({
@@ -11,6 +13,8 @@ const Login = () => {
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const changeEmailHandler = (event) => {
         setEmail(event.target.value);
@@ -35,8 +39,9 @@ const Login = () => {
             return;
         }
 
+        onLogin();
+        navigate("/");
 
-        alert(`El email ingresado es ${email} y el password: ${password}`);
     };
 
 
