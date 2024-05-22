@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Books from "../books/Books";
 import NewBook from "../newBook/NewBook";
+import { Button, Col, Row } from "react-bootstrap";
 
 const books = [
     {
@@ -46,7 +47,7 @@ const books = [
     },
 ];
 
-const Dashboard = () => {
+const Dashboard = ({ onLogout }) => {
     const [selectedBook, setSelectedBook] = useState("");
     const [booksList, setBooksList] = useState(books);
     const [searchValue, setSearchValue] = useState("");
@@ -71,7 +72,15 @@ const Dashboard = () => {
     };
     return (
         <>
-            <h1>¡Bienvenidos a Book Champions!</h1>
+            <Row className="w-100">
+                <Col />
+                <Col className="d-flex justify-content-center" md={6}>
+                    <h1>¡Bienvenidos a Book Champions!</h1>
+                </Col>
+                <Col className="d-flex justify-content-end align-items-center me-4 mt-2">
+                    <Button onClick={onLogout}>Cerrar sesión </Button>
+                </Col>
+            </Row>
             <p>¡Quiero leer libros!</p>
             <NewBook onBookDataSaved={saveBookDataHandler} />
             <p>

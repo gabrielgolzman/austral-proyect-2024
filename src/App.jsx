@@ -13,17 +13,21 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   const router = createBrowserRouter([
     {
       path: "/",
       element:
         <Protected isSignedIn={isLoggedIn}>
-          <Dashboard />
+          <Dashboard onLogout={handleLogout} />
         </Protected>
     },
     {
       path: "/login",
-      element: <Login onLogin={handleLogin} />
+      element: <Login onLogin={handleLogin} />,
     }
   ]);
 
