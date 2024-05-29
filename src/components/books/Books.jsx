@@ -5,11 +5,13 @@ const Books = ({ books, onSelectBook, onSearch, searchValue }) => {
   const booksMapped = books.map((book) => (
     <BookItem
       key={`${book.bookTitle}.${book.bookAuthor}`}
+      id={book.id}
       title={book.bookTitle}
       author={book.bookAuthor}
       rating={book.bookRating}
       pages={book.pageCount}
       image={book.imageUrl}
+      summary={book.summary}
       onSelectBook={onSelectBook}
     />
   ));

@@ -1,11 +1,27 @@
-import PropTypes from "prop-types";
-
 import { Card, Button } from "react-bootstrap";
 import { Star, StarFill } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
-const BookItem = ({ title, author, rating, pages, image, onSelectBook }) => {
+import PropTypes from "prop-types";
+
+
+
+const BookItem = ({ id, title, author, rating, pages, image, summary }) => {
+  const navigate = useNavigate();
+
   const clickHandler = () => {
-    onSelectBook(title);
+    // onSelectBook(title);
+    navigate(`/book/${id}`, {
+      state: {
+        book: {
+          title,
+          author,
+          pageCount: pages,
+          summary,
+          imageUrl: image
+        }
+      }
+    });
   };
 
   const starsFilled = rating?.map((rating, index) => <StarFill key={index} />);

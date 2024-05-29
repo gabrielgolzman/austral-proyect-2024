@@ -41,10 +41,7 @@ const Login = ({ onLogin }) => {
 
         onLogin();
         navigate("/");
-
     };
-
-
 
     return (
         <Card className="mt-5 mx-3 p-3 px-5 shadow">
