@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Books from "../books/Books";
 import NewBook from "../newBook/NewBook";
@@ -49,8 +49,17 @@ const books = [
 
 const Dashboard = ({ onLogout }) => {
     const [selectedBook, setSelectedBook] = useState("");
-    const [booksList, setBooksList] = useState(books);
+    const [booksList, setBooksList] = useState([]);
     const [searchValue, setSearchValue] = useState("");
+
+
+    useEffect(() => {
+        const booksStored = JSON.parse(localStorage.getItem("books"));
+
+        if (booksStored)
+            setBooksList(booksStored);
+    }, []);
+
 
     const saveBookDataHandler = (bookData) => {
         const newBookData = {
@@ -58,8 +67,12 @@ const Dashboard = ({ onLogout }) => {
             id: Math.random().toString(),
         };
 
-        setBooksList(prevBooksList => [newBookData, ...prevBooksList]);
+        const newBooksArray = [newBookData, ...booksList];
+        setBooksList(newBooksArray);
+        localStorage.setItem("books", JSON.stringify(newBooksArray));
     };
+
+
 
     const selectBookHandler = (title) => {
         setSelectedBook(title);

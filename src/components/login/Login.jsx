@@ -40,6 +40,7 @@ const Login = ({ onLogin }) => {
         }
 
         onLogin();
+
         navigate("/");
     };
 

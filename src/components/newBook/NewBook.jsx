@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 const NewBook = ({ onBookDataSaved }) => {
@@ -7,6 +7,24 @@ const NewBook = ({ onBookDataSaved }) => {
   const [rating, setRating] = useState("");
   const [pageCount, setPageCount] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("Check form");
+      if (title && author && rating && pageCount)
+        setFormValid(true);
+      else
+        setFormValid(false);
+    }, 500);
+
+
+    return () => {
+      console.log("Cleanup!");
+      clearTimeout(timer);
+
+    };
+  }, [title, author, rating, pageCount]);
 
   const changeTitleHandler = (event) => {
     setTitle(event.target.value);
@@ -115,7 +133,7 @@ const NewBook = ({ onBookDataSaved }) => {
           </Row>
           <Row className="justify-content-end">
             <Col md={3} className="d-flex justify-content-end">
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" disabled={!formValid}>
                 Agregar lectura
               </Button>
             </Col>
