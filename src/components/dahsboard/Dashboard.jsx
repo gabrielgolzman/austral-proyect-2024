@@ -48,7 +48,6 @@ const books = [
 ];
 
 const Dashboard = ({ onLogout }) => {
-    const [selectedBook, setSelectedBook] = useState("");
     const [booksList, setBooksList] = useState([]);
     const [searchValue, setSearchValue] = useState("");
 
@@ -72,10 +71,10 @@ const Dashboard = ({ onLogout }) => {
         localStorage.setItem("books", JSON.stringify(newBooksArray));
     };
 
-
-
-    const selectBookHandler = (title) => {
-        setSelectedBook(title);
+    const deleteBookHandler = (id) => {
+        const booksFiltered = booksList.filter(book => book.id !== id);
+        setBooksList(booksFiltered);
+        localStorage.setItem("books", JSON.stringify(booksFiltered));
     };
 
     const searchHandler = (searchQuery) => {
@@ -96,14 +95,12 @@ const Dashboard = ({ onLogout }) => {
             </Row>
             <p>¡Quiero leer libros!</p>
             <NewBook onBookDataSaved={saveBookDataHandler} />
-            <p>
-                Libro seleccionado: <span className="fw-bold">{selectedBook}</span>
-            </p>
+
             <Books
                 books={booksList}
                 searchValue={searchValue}
                 onSearch={searchHandler}
-                onSelectBook={selectBookHandler} />
+                onDelete={deleteBookHandler} />
         </>
     );
 };

@@ -1,7 +1,7 @@
 import BookItem from "../bookItem/BookItem";
 import BookSearch from "../filter/bookSearch/BookSearch";
 
-const Books = ({ books, onSelectBook, onSearch, searchValue }) => {
+const Books = ({ books, onSearch, searchValue, onDelete }) => {
   const booksMapped = books.map((book) => (
     <BookItem
       key={`${book.bookTitle}.${book.bookAuthor}`}
@@ -12,7 +12,7 @@ const Books = ({ books, onSelectBook, onSearch, searchValue }) => {
       pages={book.pageCount}
       image={book.imageUrl}
       summary={book.summary}
-      onSelectBook={onSelectBook}
+      onDelete={onDelete}
     />
   ));
   return (

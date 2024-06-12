@@ -6,11 +6,10 @@ import PropTypes from "prop-types";
 
 
 
-const BookItem = ({ id, title, author, rating, pages, image, summary }) => {
+const BookItem = ({ id, title, author, rating, pages, image, summary, onDelete }) => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
-    // onSelectBook(title);
     navigate(`/book/${id}`, {
       state: {
         book: {
@@ -22,6 +21,10 @@ const BookItem = ({ id, title, author, rating, pages, image, summary }) => {
         }
       }
     });
+  };
+
+  const deleteHandler = () => {
+    onDelete(id);
   };
 
   const starsFilled = rating?.map((rating, index) => <StarFill key={index} />);
@@ -47,7 +50,7 @@ const BookItem = ({ id, title, author, rating, pages, image, summary }) => {
         {starsFilled}{starsEmpty}
         <p>{pages} páginas</p>
         <Button onClick={clickHandler}> Seleccionar libro </Button>
-        <Button variant="danger" className="ms-2" onClick={() => { }}>Eliminar libro</Button>
+        <Button variant="danger" className="ms-2" onClick={deleteHandler}>Eliminar libro</Button>
       </Card.Body>
     </Card>
   );
