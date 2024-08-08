@@ -1,39 +1,31 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useState } from "react";
 
 import Dashboard from "./components/dahsboard/Dashboard";
 import Login from "./components/login/Login";
 import Protected from "./components/routes/protected/Protected";
 import BookDetails from "./components/bookDetails/BookDetails";
 import NotFound from "./components/routes/notFound/NotFound";
+import { AuthenticationContextProvider } from "./services/authenticationContext/authentication.context";
+import { ThemeContextProvider } from "./services/theme.context.jsx/theme.context";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Protected isSignedIn={isLoggedIn} />,
+      element: <Protected />,
       children: [{
         path: "/book/:id",
         element: <BookDetails />,
       }, {
         path: "/",
-        element: <Dashboard onLogout={handleLogout} />
+        element: <Dashboard />
       }
       ]
     },
     {
       path: "/login",
-      element: <Login onLogin={handleLogin} />,
+      element: <Login />,
     },
     {
       path: "*",
@@ -44,7 +36,12 @@ const App = () => {
 
   return (
     <div className="d-flex flex-column align-items-center">
-      <RouterProvider router={router} />
+      <AuthenticationContextProvider>
+        <ThemeContextProvider>
+          <RouterProvider router={router} />
+        </ThemeContextProvider>
+      </AuthenticationContextProvider>
+
     </div>
   );
 };

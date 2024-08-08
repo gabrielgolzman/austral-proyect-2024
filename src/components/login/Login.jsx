@@ -1,9 +1,14 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from
     "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ onLogin }) => {
+import { AuthenticationContext } from "../../services/authenticationContext/authentication.context";
+
+import ToggleTheme from "../toggleTheme/ToggleTheme";
+
+const Login = () => {
+    const { handleLogin } = useContext(AuthenticationContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({
@@ -39,7 +44,7 @@ const Login = ({ onLogin }) => {
             return;
         }
 
-        onLogin();
+        handleLogin(email);
 
         navigate("/");
     };
@@ -77,10 +82,11 @@ const Login = ({ onLogin }) => {
                     </FormGroup>
                     <Row>
                         <Col />
-                        <Col md={6} className="d-flex justify-content-end">
+                        <Col md={6} className="d-flex justify-content-end flex-column">
                             <Button variant="secondary" type="submit">
                                 Iniciar sesión
                             </Button>
+                            <ToggleTheme className="mt-4" />
                         </Col>
                     </Row>
                 </Form>
