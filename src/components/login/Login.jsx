@@ -5,10 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 import { AuthenticationContext } from "../../services/authenticationContext/authentication.context";
 
-import ToggleTheme from "../toggleTheme/ToggleTheme";
+import ToggleTheme from "../ui/toggleTheme/ToggleTheme";
+import ComboLanguage from "../ui/comboLanguage/ComboLanguage";
+import useTranslation from "../../custom/useTranslation/useTranslation";
 
 const Login = () => {
     const { handleLogin } = useContext(AuthenticationContext);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({
@@ -18,6 +21,8 @@ const Login = () => {
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+
+    const translate = useTranslation();
 
     const navigate = useNavigate();
 
@@ -53,8 +58,9 @@ const Login = () => {
         <Card className="mt-5 mx-3 p-3 px-5 shadow">
             <Card.Body>
                 <Row>
-                    <h5>¡Bienvenidos a Books Champion!</h5>
+                    <h5>{translate("welcome")}</h5>
                 </Row>
+                <ComboLanguage />
                 <Form onSubmit={submitHandler}>
                     <FormGroup className="mb-4">
                         <Form.Control
@@ -84,7 +90,7 @@ const Login = () => {
                         <Col />
                         <Col md={6} className="d-flex justify-content-end flex-column">
                             <Button variant="secondary" type="submit">
-                                Iniciar sesión
+                                {translate("login")}
                             </Button>
                             <ToggleTheme className="mt-4" />
                         </Col>

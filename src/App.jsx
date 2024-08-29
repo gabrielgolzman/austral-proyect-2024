@@ -7,6 +7,7 @@ import BookDetails from "./components/bookDetails/BookDetails";
 import NotFound from "./components/routes/notFound/NotFound";
 import { AuthenticationContextProvider } from "./services/authenticationContext/authentication.context";
 import { ThemeContextProvider } from "./services/theme.context.jsx/theme.context";
+import { TranslationContextProvider } from "./services/translationContext/translation.context";
 
 const App = () => {
 
@@ -38,7 +39,9 @@ const App = () => {
     <div className="d-flex flex-column align-items-center">
       <AuthenticationContextProvider>
         <ThemeContextProvider>
-          <RouterProvider router={router} />
+          <TranslationContextProvider>
+            <RouterProvider router={router} />
+          </TranslationContextProvider>
         </ThemeContextProvider>
       </AuthenticationContextProvider>
 

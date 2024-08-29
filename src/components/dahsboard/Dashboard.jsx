@@ -5,8 +5,7 @@ import Books from "../books/Books";
 import NewBook from "../newBook/NewBook";
 
 import { AuthenticationContext } from "../../services/authenticationContext/authentication.context";
-import ToggleTheme from "../toggleTheme/ToggleTheme";
-
+import ToggleTheme from "../ui/toggleTheme/ToggleTheme";
 const Dashboard = () => {
     const [booksList, setBooksList] = useState([]);
     const [searchValue, setSearchValue] = useState("");
